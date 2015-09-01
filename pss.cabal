@@ -1,0 +1,28 @@
+name: pss
+version: 0.1.0.0
+cabal-version: >=1.10
+build-type: Simple
+license: GPL-3
+license-file: LICENSE
+maintainer: feldrandstudios@gmail.com
+homepage: h2421368.stratoserver.net
+synopsis: Web-representation of project-som.
+category: Web
+author: Julius Quasebarth
+data-dir: ""
+
+executable PSS
+    build-depends: base >=4.7 && <4.8, monad-logger >=0.3 && <0.4,
+                   text >=1.2 && <1.3, persistent-mysql >=2.2 && <2.3,
+                   hjsmin >=0.1 && <0.2, yesod >=1.4 && <1.5,
+                   yesod-form >=1.4 && <1.5, yesod-static >=1.5 && <1.6,
+                   bytestring >=0.10, shakespeare >=2.0
+    main-is: Main.hs
+    buildable: True
+    default-language: Haskell2010
+    other-extensions: OverloadedStrings QuasiQuotes TemplateHaskell
+                      TypeFamilies EmptyDataDecls FlexibleContexts GADTs
+                      MultiParamTypeClasses GeneralizedNewtypeDeriving
+    other-modules: Database
+
+
