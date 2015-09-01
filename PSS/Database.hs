@@ -4,6 +4,7 @@
 module PSS.Database where
 
 import Database.Persist.MySQL
+import Data.Maybe
 import Data.Text (Text)
 
 import Yesod
@@ -30,6 +31,30 @@ Book
     deriving Show
 |]
 
+-- | Merges the given opinion into the existing set of opinions.
+-- `given -> existing -> result`
+mergeOpinion :: Book -> Book -> Book
+mergeOpinion b bs = Book
+    (bookName b)
+    (bookAuthor b)
+    (Just $ cg + 1)
+    (mer bookSpann)
+    (mer bookActi)
+    (mer bookLineart)
+    (mer bookEmotion)
+    (mer bookRealit)
+    (mer bookEinfuehl)
+    (mer bookHorror)
+    (mer bookGutboes)
+    (mer bookTief)
+    (mer bookZeit)
+    (mer bookNachv)
+    (mer bookHumor)
+    (mer bookEnde)
+    where
+        cg = fromMaybe 1 (bookCount bs)
+        mer f = (f b + f bs * fromIntegral cg) / fromIntegral (cg + 1)
+
 -- | Gets the unique constraint from a book.
 specFromBook :: Book -> Unique Book
 specFromBook b = BookSpec (bookName b) (bookAuthor b)
@@ -37,3 +62,5 @@ specFromBook b = BookSpec (bookName b) (bookAuthor b)
 -- | The default connection info to connect with the database.
 connInfo :: ConnectInfo
 connInfo = defaultConnectInfo {connectDatabase = "bookadvice"}
+
+-- #TODO:10 Add search function

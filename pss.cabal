@@ -24,5 +24,3 @@ executable PSS
                       TypeFamilies EmptyDataDecls FlexibleContexts GADTs
                       MultiParamTypeClasses GeneralizedNewtypeDeriving
     other-modules: Database
-
-
