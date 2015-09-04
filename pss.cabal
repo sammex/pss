@@ -3,7 +3,6 @@ version: 0.1.0.0
 cabal-version: >=1.10
 build-type: Simple
 license: GPL-3
-license-file: LICENSE
 maintainer: feldrandstudios@gmail.com
 homepage: h2421368.stratoserver.net
 synopsis: Web-representation of project-som.

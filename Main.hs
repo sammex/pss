@@ -5,6 +5,7 @@ module Main where
 import Control.Monad.Logger
 import Control.Applicative
 
+import Database.Persist.MySQL
 import qualified Data.ByteString.Lazy.Char8 as BS
 import Data.Either
 import Data.Maybe

@@ -165,7 +165,15 @@ getLinksR = contentLayout $(whamletFile "pre/html/links.hamlet")
 
 -- | The dynamic version of the search page, accepting the search request (content format).
 postSearchR :: Handler Html
-postSearchR = contentLayout $(whamletFile "pre/html/search.hamlet")
+postSearchR = do {
+        -- mi now is a Maybe (name information, author information)
+        mi <- do {n <- lookupPostParam "name"; a <- lookupPostParam "author"; return (n, a)};
+        maybe
+            (setMessage "Bitte beide Felder ausfüllen!")
+            (\(n, a) -> runDB $ searchBookOperation (BookSpec n a) 0 10)
+            mi;
+        messageLayout;
+    }
 
 -- | Gets the static version of the search page (content format).
 getSearchR :: Handler Html

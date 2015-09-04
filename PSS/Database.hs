@@ -10,7 +10,7 @@ import Data.Text (Text)
 import Yesod
 
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
-Book
+Book sql=books
     name Text
     author Text
     count Int Maybe
@@ -55,12 +55,12 @@ mergeOpinion b bs = Book
         cg = fromMaybe 1 (bookCount bs)
         mer f = (f b + f bs * fromIntegral cg) / fromIntegral (cg + 1)
 
+type BookSpec = Unique Book
+
 -- | Gets the unique constraint from a book.
-specFromBook :: Book -> Unique Book
+specFromBook :: Book -> BookSpec
 specFromBook b = BookSpec (bookName b) (bookAuthor b)
 
 -- | The default connection info to connect with the database.
 connInfo :: ConnectInfo
 connInfo = defaultConnectInfo {connectDatabase = "bookadvice"}
-
--- #TODO:10 Add search function
