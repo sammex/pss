@@ -3,7 +3,11 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 module PSS.Database where
 
+import Control.Monad.Reader
+import Control.Monad.Trans.Resource
+
 import Database.Persist.MySQL
+import Data.Conduit
 import Data.Maybe
 import Data.Text (Text)
 
@@ -64,3 +68,7 @@ specFromBook b = BookSpec (bookName b) (bookAuthor b)
 -- | The default connection info to connect with the database.
 connInfo :: ConnectInfo
 connInfo = defaultConnectInfo {connectDatabase = "bookadvice"}
+
+-- | Gets a source of all books in the database.
+getEntitySource :: Source (ReaderT SqlBackend (ResourceT IO)) Book
+getEntitySource = mapOutput entityVal (selectSource [] [])

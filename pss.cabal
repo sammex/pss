@@ -15,7 +15,8 @@ executable PSS
                    text >=1.2 && <1.3, persistent-mysql >=2.2 && <2.3,
                    hjsmin >=0.1 && <0.2, yesod >=1.4 && <1.5,
                    yesod-form >=1.4 && <1.5, yesod-static >=1.5 && <1.6,
-                   bytestring >=0.10, shakespeare >=2.0
+                   bytestring >=0.10, shakespeare >=2.0, mtl >=2.1.3.1,
+                   conduit >=1.2.5, resourcet >=1.1.6
     main-is: Main.hs
     buildable: True
     default-language: Haskell2010
